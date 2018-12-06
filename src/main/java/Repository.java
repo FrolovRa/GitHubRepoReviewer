@@ -1,7 +1,9 @@
         import com.google.gson.annotations.Expose;
         import com.google.gson.annotations.SerializedName;
+        import javafx.beans.property.SimpleIntegerProperty;
+        import javafx.beans.property.SimpleStringProperty;
 
-    public class Repository {
+        public class Repository {
 
         @SerializedName("name")
         @Expose private String name;
@@ -20,6 +22,10 @@
 
         public String getName() {
             return name;
+        }
+
+        public SimpleStringProperty getSimpleStringName() {
+            return new SimpleStringProperty(name);
         }
 
         public String getDescription() {

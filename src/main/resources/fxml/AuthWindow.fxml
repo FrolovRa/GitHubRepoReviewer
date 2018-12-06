@@ -8,8 +8,8 @@
 
 <VBox spacing="5.0" alignment="CENTER" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="EnterWindowController"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:controller="AuthWindowController"
+            prefHeight="300.0" prefWidth="250.0">
 
     <TextField fx:id="login" maxWidth="200.0" prefWidth="200.0" promptText="Login"/>
 

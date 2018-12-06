@@ -5,5 +5,8 @@ import java.util.List;
 public interface GitHubAPI {
     @GET("user/repos")
     Call<List<Repository>> getUserRepositories();
+
+    @GET("user")
+    Call<User> getUser();
 }
 
