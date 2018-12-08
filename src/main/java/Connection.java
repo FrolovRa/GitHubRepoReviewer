@@ -1,7 +1,10 @@
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -48,8 +51,16 @@ public class Connection {
                                     getRepos(Main.getCredential());
 
                                     Stage newWindow = new Stage();
+                                    Scene scene =  new Scene(root);
+                                    scene.setOnKeyPressed(event -> {
+                                        if(event.getCode() == KeyCode.F5){
+                                            Main.controller.tableView.getItems().clear();
+                                            Main.getConnection().getRepos(Main.getCredential());
+                                            System.out.println("F5 was pressed");
+                                        }
+                                    });
                                     newWindow.setTitle("Repository Viewer");
-                                    newWindow.setScene(new Scene(root));
+                                    newWindow.setScene(scene);
                                     newWindow.show();
 
                                 } catch (Exception e) {System.out.println(e);}
