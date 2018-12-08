@@ -1,8 +1,5 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -19,6 +16,16 @@ public class MainWindowController {
     @FXML public TextField searchField;
 
     @FXML public Button exitButton;
+
+    @FXML public Button searchButton;
+
+    @FXML public void search(){
+        for (Repository r:Main.controller.tableView.getItems()) {
+            if (searchField.getText().equals(r.getName())){
+                System.out.println("find Repository");
+            }
+        }
+    }
 
     @FXML
     public void initialize() {

@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.collections.FXCollections?>
-
 <VBox spacing="5.0" alignment="CENTER" fx:controller="MainWindowController"
       xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
@@ -22,12 +21,13 @@
             <Label fx:id="login" text="hello"/>
         </VBox>
         <TextField fx:id="searchField" prefWidth="150.0" prefHeight="20.0"/>
-        <Button fx:id="exitButton" prefWidth="20.0" prefHeight="20.0"/>
+        <Button text="Search" fx:id="searchButton" onAction="#search" prefWidth="80.0" prefHeight="20.0"/>
+        <Button text="Exit" fx:id="exitButton" prefWidth="80.0" prefHeight="20.0"/>
     </HBox>
     <TableView fx:id="tableView">
         <columns>
-            <TableColumn editable="false" resizable="false" text="#">
-            </TableColumn>
+            <!--<TableColumn editable="false" resizable="false" text="#">-->
+            <!--</TableColumn>-->
             <TableColumn editable="false" resizable="false" text="Name">
                 <cellValueFactory>
                     <PropertyValueFactory property="name"/>

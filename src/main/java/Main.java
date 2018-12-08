@@ -32,10 +32,7 @@ public class Main extends Application {
 
 //        String credential = Credentials.basic("FrolovRa", "f7RvWUwvH8NnKWB");
 //        Main.getConnection().getRepos(credential);
-
-
     }
-
 
 
     public static void main(String[] args) {
