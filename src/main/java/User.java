@@ -1,5 +1,6 @@
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import javafx.beans.property.SimpleStringProperty;
 
 public class User {
     @SerializedName("name")

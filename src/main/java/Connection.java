@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,7 +35,26 @@ public class Connection {
                 if (response.isSuccessful()) {
                     System.out.println(response);
                     if (response.body() != null){
+                        Main.user = response.body();
                         System.out.println(response.body().getAvatar_url()+" "+response.body().getName());
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                try{
+                                    FXMLLoader fxml = new FXMLLoader(getClass().getResource("fxml/MainWindow.fxml"));
+                                    Parent root = fxml.load();
+                                    Main.controller = fxml.getController();
+
+                                    getRepos(Main.getCredential());
+
+                                    Stage newWindow = new Stage();
+                                    newWindow.setTitle("Repository Viewer");
+                                    newWindow.setScene(new Scene(root));
+                                    newWindow.show();
+
+                                } catch (Exception e) {System.out.println(e);}
+                            }
+                        });
                     }
                 } else {
                     System.out.println("error");
@@ -57,9 +77,8 @@ public class Connection {
                 if (response.isSuccessful()) {
                     System.out.println(response);
                     if (response.body() != null){
-                        for (Repository r:response.body()) {
-                            System.out.println(r.getName());
-                        }
+//                        System.out.println(Main.controller.tableView.getItems());
+                        if(Main.controller != null) Main.controller.tableView.getItems().addAll(response.body());
                     }
                 } else {
                     System.out.println("error");
@@ -67,7 +86,7 @@ public class Connection {
             }
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
-                System.out.println("connection error");
+                System.out.println("connection error" + t);
             }
         });
     }

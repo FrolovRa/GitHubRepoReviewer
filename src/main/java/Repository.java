@@ -1,7 +1,5 @@
         import com.google.gson.annotations.Expose;
         import com.google.gson.annotations.SerializedName;
-        import javafx.beans.property.SimpleIntegerProperty;
-        import javafx.beans.property.SimpleStringProperty;
 
         public class Repository {
 
@@ -11,36 +9,32 @@
         @SerializedName("description")
         @Expose private String description;
 
-        @SerializedName("fork_count")
-        @Expose private Integer fork_count;
+        @SerializedName("forks_count")
+        @Expose private Integer forkCount;
 
         @SerializedName("stargazers_count")
-        @Expose private Integer stargazers_count;
+        @Expose private Integer stargazersCount;
 
         @SerializedName("watchers_count")
-        @Expose private Integer watchers_count;
+        @Expose private Integer watchersCount;
 
-        public String getName() {
-            return name;
-        }
+            public String getName() {
+                return name;
+            }
 
-        public SimpleStringProperty getSimpleStringName() {
-            return new SimpleStringProperty(name);
-        }
+            public String getDescription() {
+                return description;
+            }
 
-        public String getDescription() {
-            return description;
-        }
+            public Integer getForkCount() {
+                return forkCount;
+            }
 
-        public Integer getFork_count() {
-            return fork_count;
-        }
+            public Integer getStargazersCount() {
+                return stargazersCount;
+            }
 
-        public Integer getStargazers_count() {
-            return stargazers_count;
+            public Integer getWatchersCount() {
+                return watchersCount;
+            }
         }
-
-        public Integer getWatchers_count() {
-            return watchers_count;
-        }
-    }
