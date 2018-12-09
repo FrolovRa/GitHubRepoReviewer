@@ -15,6 +15,8 @@ public class AuthWindowController {
 
     @FXML public void click(){
        Main.setCredential(Credentials.basic(login.getText(), password.getText()));
+       this.login.setText("");
+       this.password.setText("");
        Main.getConnection().getUser(Main.getCredential());
     }
 

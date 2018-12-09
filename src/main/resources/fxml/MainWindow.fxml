@@ -22,12 +22,12 @@
         </VBox>
         <TextField fx:id="searchField" prefWidth="150.0" prefHeight="20.0"/>
         <Button text="Search" fx:id="searchButton" onAction="#search" prefWidth="80.0" prefHeight="20.0"/>
-        <Button text="Exit" fx:id="exitButton" prefWidth="80.0" prefHeight="20.0"/>
+        <Button text="Exit" fx:id="exitButton" onAction="#logout" prefWidth="80.0" prefHeight="20.0"/>
     </HBox>
     <TableView fx:id="tableView">
         <columns>
-            <!--<TableColumn editable="false" resizable="false" text="#">-->
-            <!--</TableColumn>-->
+            <TableColumn fx:id="numbers" editable="false" resizable="false" text="#">
+            </TableColumn>
             <TableColumn editable="false" resizable="false" text="Name">
                 <cellValueFactory>
                     <PropertyValueFactory property="name"/>

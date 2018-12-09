@@ -5,14 +5,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
     private static Connection connection;
     static MainWindowController controller;
     static User user;
     private static String credential;
+    static Stage authWindow;
+    static Stage newWindow;
 
     static void setCredential(String cred) {
         credential = cred;
     }
+
     static String getCredential() {
         return credential;
     }
@@ -29,6 +33,7 @@ public class Main extends Application {
         primaryStage.setTitle("Repository Viewer");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        authWindow = primaryStage;
 
 //        String credential = Credentials.basic("FrolovRa", "f7RvWUwvH8NnKWB");
 //        Main.getConnection().getRepos(credential);
