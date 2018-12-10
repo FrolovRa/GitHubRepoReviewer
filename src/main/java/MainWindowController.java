@@ -1,8 +1,6 @@
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -13,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
-import java.awt.*;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
@@ -46,8 +44,8 @@ public class MainWindowController {
 
     @FXML public void logout() {
         Main.setCredential("");
-        Main.authWindow.show();
-        Main.newWindow.close();
+        Main.getAuthWindow().show();
+        Main.getMainWindow().close();
     }
 
     @FXML
@@ -69,6 +67,7 @@ public class MainWindowController {
                 };
             }
         });
+
         tableView.setRowFactory(tableView -> {
             final TableRow<Repository> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
@@ -88,9 +87,10 @@ public class MainWindowController {
             );
             return row ;
         });
-        avatar.setImage(new Image(Main.user.getAvatar_url()));
-        userName.setText(Main.user.getName());
-        login.setText(Main.user.getLogin());
+
+        avatar.setImage(new Image(Connection.getConnection().getUser().getAvatar_url()));
+        userName.setText(Connection.getConnection().getUser().getName());
+        login.setText(Connection.getConnection().getUser().getLogin());
     }
 
 }

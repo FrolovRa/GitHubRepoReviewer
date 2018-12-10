@@ -2,7 +2,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import okhttp3.Credentials;
 
 public class AuthWindowController {
@@ -17,7 +16,6 @@ public class AuthWindowController {
        Main.setCredential(Credentials.basic(login.getText(), password.getText()));
        this.login.setText("");
        this.password.setText("");
-       Main.getConnection().getUser(Main.getCredential());
+       Connection.getConnection().requestUser(Main.getCredential());
     }
-
 }

@@ -7,25 +7,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static Connection connection;
-    static MainWindowController controller;
-    static User user;
+    private static MainWindowController controller;
     private static String credential;
-    static Stage authWindow;
-    static Stage newWindow;
-
-    static void setCredential(String cred) {
-        credential = cred;
-    }
-
-    static String getCredential() {
-        return credential;
-    }
-
-    static Connection getConnection() {
-        return Main.connection;
-    }
-
+    private static Stage authWindow;
+    private static Stage mainWindow;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -36,14 +21,39 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("Images/cloud.png"));
         primaryStage.show();
         authWindow = primaryStage;
-
-//        String credential = Credentials.basic("FrolovRa", "f7RvWUwvH8NnKWB");
-//        Main.getConnection().getRepos(credential);
+        //f7RvWUwvH8NnKWB
     }
-
 
     public static void main(String[] args) {
-        connection = new Connection();
-        launch(args);
+        launch();
     }
+
+    static MainWindowController getController() {
+        return controller;
+    }
+
+    static void setController(MainWindowController controller) {
+        Main.controller = controller;
+    }
+
+    static Stage getAuthWindow() {
+        return authWindow;
+    }
+
+    static Stage getMainWindow() {
+        return mainWindow;
+    }
+
+    static void setMainWindow(Stage mainWindow) {
+        Main.mainWindow = mainWindow;
+    }
+
+    static void setCredential(String cred) {
+        credential = cred;
+    }
+
+    static String getCredential() {
+        return credential;
+    }
+
 }

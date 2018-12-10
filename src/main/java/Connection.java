@@ -1,15 +1,9 @@
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -22,8 +16,18 @@ import java.util.List;
 public class Connection {
 
     private GitHubAPI gitHub;
+    private static Connection connection = new Connection();
+    private User user;
 
-    Connection() {
+    public User getUser() {
+        return user;
+    }
+
+    public static Connection getConnection() {
+        return connection;
+    }
+
+    private Connection() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -33,7 +37,7 @@ public class Connection {
          gitHub = retrofit.create(GitHubAPI.class);
     }
 
-    void getUser(String credential) {
+    void requestUser(String credential) {
 
         Call<User> call = gitHub.getUser(credential);
 
@@ -43,62 +47,36 @@ public class Connection {
                 if (response.isSuccessful()) {
                     System.out.println(response);
                     if (response.body() != null){
-                        Main.user = response.body();
-                        System.out.println(response.body().getAvatar_url()+" "+response.body().getName());
+                        user = response.body();
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
                                 try{
                                     FXMLLoader fxml = new FXMLLoader(getClass().getResource("fxml/MainWindow.fxml"));
                                     Parent root = fxml.load();
-                                    Main.controller = fxml.getController();
+                                    Main.setController(fxml.getController());
 
-                                    getRepos(Main.getCredential());
+                                    requestRepos(Main.getCredential());
 
-                                    Main.newWindow = new Stage();
+                                    Main.setMainWindow(new Stage());
                                     Scene scene =  new Scene(root);
                                     scene.setOnKeyPressed(event -> {
                                         if(event.getCode() == KeyCode.F5){
 
-                                            Main.controller.tableView.getItems().clear();
-                                            Main.getConnection().getRepos(Main.getCredential());
+                                            Main.getController().tableView.getItems().clear();
+                                            Connection.getConnection().requestRepos(Main.getCredential());
                                             System.out.println("F5 was pressed");
                                         }
                                     });
-                                    Main.newWindow.setTitle("Repository Viewer");
-                                    Main.newWindow.setScene(scene);
-                                    Main.newWindow.getIcons().add(new Image("Images/cloud.png"));
-//                                    ContextMenu cm = new ContextMenu();
-//                                    MenuItem mi1 = new MenuItem("Copy the URL");
+                                    Main.getMainWindow().setTitle("Repository Viewer");
+                                    Main.getMainWindow().setScene(scene);
+                                    Main.getMainWindow().getIcons().add(new Image("Images/cloud.png"));
 //
-//                                    mi1.setOnAction((ActionEvent event) -> {
-//                                        System.out.println("Menu item 1");
-//                                        String item = Main.controller.tableView.getSelectionModel().getSelectedItem().getUrl();
-//                                        if(Main.controller.tableView.getSelectionModel().getSelectedItem() != null) {
-//                                            System.out.println("Selected item: " + item);
-//                                        }
-//
-//                                    });
-//
-//                                    ContextMenu menu = new ContextMenu();
-//                                    menu.getItems().add(mi1);
-//                                    Main.controller.tableView.setContextMenu(menu);
+                                    Main.getMainWindow().show();
+                                    Main.getAuthWindow().close();
 
-//                                    Main.controller.tableView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//
-//                                        @Override
-//                                        public void handle(MouseEvent t) {
-//                                            if(t.getButton() == MouseButton.SECONDARY) {
-//                                                cm.show(Main.controller.tableView, t.getScreenX(), t.getScreenY());
-//                                                System.out.println("ok");
-//                                            }
-//                                        }
-//                                    });
-
-                                    Main.newWindow.show();
-                                    Main.authWindow.close();
-
-                                } catch (Exception e) {System.out.println(e);}
+                                } catch (Exception e) {
+                                    System.out.println(e);}
                             }
                         });
                     }
@@ -113,7 +91,7 @@ public class Connection {
         });
     }
 
-    void getRepos(String credential) {
+    void requestRepos(String credential) {
 
         Call<List<Repository>> call = gitHub.getUserRepositories(credential);
 
@@ -123,8 +101,7 @@ public class Connection {
                 if (response.isSuccessful()) {
                     System.out.println(response);
                     if (response.body() != null){
-//                        System.out.println(Main.controller.tableView.getItems());
-                        if(Main.controller != null) Main.controller.tableView.getItems().addAll(response.body());
+                        if(Main.getController() != null) Main.getController().tableView.getItems().addAll(response.body());
                     }
                 } else {
                     System.out.println("error");

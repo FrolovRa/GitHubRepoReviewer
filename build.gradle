@@ -1,17 +1,31 @@
-plugins {
-    id 'java'
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+        //there is a problem with this plugin. It only build app with Ant-javafx.jar in java/lib not in java/jdk-10.0.2/lib
+    }
+    repositories {
+        jcenter() {url "http://jcenter.bintray.com"}
+        mavenLocal()
+        mavenCentral()
+    }
 }
 
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
+apply plugin: 'java'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
+
+apply plugin: 'javafx-gradle-plugin'
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+}
+
+jfx {
+    mainClass = 'Main'
+    vendor = 'Name'
 }
