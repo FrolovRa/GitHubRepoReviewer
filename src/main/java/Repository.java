@@ -18,6 +18,9 @@
         @SerializedName("watchers_count")
         @Expose private Integer watchersCount;
 
+        @SerializedName("url")
+        @Expose private String url;
+
             public String getName() {
                 return name;
             }
@@ -25,6 +28,8 @@
             public String getDescription() {
                 return description;
             }
+
+            public String getUrl() {return url;}
 
             public Integer getForkCount() {
                 return forkCount;
@@ -37,4 +42,5 @@
             public Integer getWatchersCount() {
                 return watchersCount;
             }
+
         }

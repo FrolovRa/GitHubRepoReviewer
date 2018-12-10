@@ -1,8 +1,15 @@
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -60,6 +67,34 @@ public class Connection {
                                     });
                                     Main.newWindow.setTitle("Repository Viewer");
                                     Main.newWindow.setScene(scene);
+                                    Main.newWindow.getIcons().add(new Image("Images/cloud.png"));
+//                                    ContextMenu cm = new ContextMenu();
+//                                    MenuItem mi1 = new MenuItem("Copy the URL");
+//
+//                                    mi1.setOnAction((ActionEvent event) -> {
+//                                        System.out.println("Menu item 1");
+//                                        String item = Main.controller.tableView.getSelectionModel().getSelectedItem().getUrl();
+//                                        if(Main.controller.tableView.getSelectionModel().getSelectedItem() != null) {
+//                                            System.out.println("Selected item: " + item);
+//                                        }
+//
+//                                    });
+//
+//                                    ContextMenu menu = new ContextMenu();
+//                                    menu.getItems().add(mi1);
+//                                    Main.controller.tableView.setContextMenu(menu);
+
+//                                    Main.controller.tableView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+//
+//                                        @Override
+//                                        public void handle(MouseEvent t) {
+//                                            if(t.getButton() == MouseButton.SECONDARY) {
+//                                                cm.show(Main.controller.tableView, t.getScreenX(), t.getScreenY());
+//                                                System.out.println("ok");
+//                                            }
+//                                        }
+//                                    });
+
                                     Main.newWindow.show();
                                     Main.authWindow.close();
 

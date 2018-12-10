@@ -1,10 +1,21 @@
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 public class MainWindowController {
 
@@ -57,6 +68,25 @@ public class MainWindowController {
                     }
                 };
             }
+        });
+        tableView.setRowFactory(tableView -> {
+            final TableRow<Repository> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            final MenuItem copyUrl = new MenuItem("Copy the URL");
+            copyUrl.setOnAction(event -> {
+                StringSelection select= new StringSelection(tableView.getSelectionModel().getSelectedItem().getUrl());
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents(select, select);
+            });
+            contextMenu.getItems().add(copyUrl);
+
+            row.contextMenuProperty().bind(
+
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu)null)
+                            .otherwise(contextMenu)
+            );
+            return row ;
         });
         avatar.setImage(new Image(Main.user.getAvatar_url()));
         userName.setText(Main.user.getName());
