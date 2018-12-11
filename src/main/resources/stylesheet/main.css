@@ -1,0 +1,94 @@
+
+.root{
+    -fx-background-color: linear-gradient(to top, #09203f 0%, #537895 100%);
+    -fx-font-family: 'Dosis', sans-serif;
+    -fx-font-size: 14;
+}
+
+#avatar{
+   -fx-translate-x: 20;
+    -fx-translate-y: 5;
+}
+
+#userName, #login {
+    -fx-text-fill: lightgrey;
+    -fx-translate-x: 50;
+    -fx-translate-y: 15;
+}
+
+#exitButton {
+    -fx-translate-x: 300;
+    -fx-pref-width: 32;
+    -fx-background-image: url("/Images/exit.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
+
+#searchField {
+    -fx-translate-x: 235;
+    -fx-text-fill: #779fbf;
+    -fx-background-color: rgba(0,0,0,.7);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5 10 5 10;
+}
+
+#searchButton {
+    -fx-translate-x: 250;
+    -fx-pref-width: 32;
+    -fx-background-image: url("/Images/search.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
+
+#searchField, #searchButton, #exitButton {
+    -fx-translate-y: 24;
+}
+
+#userName {
+    -fx-font-size: 24;
+}
+
+
+#tableView{
+    -fx-translate-y: 5;
+    -fx-background-color: transparent;
+}
+
+
+.table-view .column-header{
+    -fx-background-color: #537895;
+
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+    -fx-padding: 10 10 10 10;
+}
+
+.table-row-cell{
+
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-color: linear-gradient(to left, #325164 0%, #537895 100%);
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color: linear-gradient(to left, #325164 0%, #6c97b6 100%);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #5489ae;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}

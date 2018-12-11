@@ -4,51 +4,51 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.shape.Circle?>
 <VBox spacing="5.0" alignment="CENTER" fx:controller="MainWindowController"
       xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
-      prefHeight="400.0"
-      prefWidth="600.0">
-    <HBox>
-        <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0"/>
+      prefHeight="500.0"
+      prefWidth="922.0">
+    <HBox prefHeight="60.0">
+        <Circle fx:id="avatar" />
         <VBox minWidth="200.0">
             <Label fx:id="userName"/>
-            <Label fx:id="login" text="hello"/>
+            <Label fx:id="login"/>
         </VBox>
-        <TextField fx:id="searchField" prefWidth="150.0" prefHeight="20.0"/>
-        <Button text="Search" fx:id="searchButton" onAction="#search" prefWidth="80.0" prefHeight="20.0"/>
-        <Button text="Exit" fx:id="exitButton" onAction="#logout" prefWidth="80.0" prefHeight="20.0"/>
+        <TextField fx:id="searchField" prefWidth="250.0" prefHeight="20.0"/>
+        <Button  fx:id="searchButton" onAction="#search" />
+        <Button  fx:id="exitButton" onAction="#logout"/>
     </HBox>
-    <TableView  fx:id="tableView">
+    <TableView fx:id="tableView" focusTraversable="false">
         <columns>
-            <TableColumn fx:id="numbers" editable="false" sortable="false" prefWidth="30.0" resizable="false" text="#">
+            <TableColumn fx:id="numbers" reorderable="false" editable="false" sortable="false" prefWidth="30.0" resizable="false" text="#">
             </TableColumn>
-            <TableColumn editable="false" prefWidth="180.0" resizable="false" text="Name">
+            <TableColumn editable="false" reorderable="false" prefWidth="180.0" resizable="false" text="Name">
                 <cellValueFactory>
                     <PropertyValueFactory property="name"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="500.0" text="Description">
+            <TableColumn editable="false" reorderable="false" prefWidth="500.0" sortable="false" resizable="false" text="Description">
                 <cellValueFactory>
                     <PropertyValueFactory property="description"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="40.0" resizable="false" text="Watched">
+            <TableColumn editable="false" reorderable="false" prefWidth="70.0" resizable="false" text="Watched">
                 <cellValueFactory>
                     <PropertyValueFactory property="watchersCount"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="40.0" resizable="false" text="Stars">
+            <TableColumn editable="false" reorderable="false" prefWidth="70.0" resizable="false" text="Stars">
                 <cellValueFactory>
                     <PropertyValueFactory property="stargazersCount"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="55.0" resizable="false" text="Forks">
+            <TableColumn editable="false" reorderable="false" prefWidth="70.0" resizable="false" text="Forks">
                 <cellValueFactory>
                     <PropertyValueFactory property="forkCount"/>
                 </cellValueFactory>

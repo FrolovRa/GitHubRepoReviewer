@@ -1,0 +1,26 @@
+
+#submit {
+    -fx-text-fill: #729dbc;
+    -fx-background-color: rgba(0,0,0,.7);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+}
+
+#submit:hover {
+    -fx-background-color: rgba(0,0,0,.9);
+}
+
+#login, #password{
+    -fx-text-fill: #779fbf;
+    -fx-background-color: rgba(0,0,0,.7);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5 10 5 10;
+}
+
+.root{
+    -fx-background: linear-gradient(to top, #09203f 0%, #537895 100%);
+    -fx-font-family: 'Dosis', sans-serif;
+    -fx-font-size: 14;
+}

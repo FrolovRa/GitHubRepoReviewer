@@ -8,18 +8,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Callback;
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainWindowController {
 
     @FXML public TableView<Repository> tableView;
 
-    @FXML public ImageView avatar;
+    @FXML public Circle avatar;
 
     @FXML public Label userName;
 
@@ -34,12 +36,16 @@ public class MainWindowController {
     @FXML public TableColumn numbers;
 
     @FXML public void search() {
+        List<Repository> result = new ArrayList<>();
         for (Repository r:this.tableView.getItems()) {
             if (searchField.getText().toLowerCase().equals(r.getName().toLowerCase())){
                 System.out.println("find Repository");
+                result.add(r);
                 //add later rxJava search
             }
         }
+        tableView.getItems().addAll(result);
+        result.clear();
     }
 
     @FXML public void logout() {
@@ -54,12 +60,13 @@ public class MainWindowController {
 
         numbers.setCellFactory(new Callback<TableColumn<Repository, Repository>, TableCell<Repository, Repository>>() {
             @Override public TableCell<Repository, Repository> call(TableColumn<Repository, Repository> param) {
-                return new TableCell<Repository, Repository>() {
-                    @Override protected void updateItem(Repository item, boolean empty) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(Repository item, boolean empty) {
                         super.updateItem(item, empty);
 
                         if (this.getTableRow() != null && item != null) {
-                            setText(this.getTableRow().getIndex()+ 1 + "");
+                            setText(this.getTableRow().getIndex() + 1 + "");
                         } else {
                             setText("");
                         }
@@ -87,10 +94,10 @@ public class MainWindowController {
             );
             return row ;
         });
-
-        avatar.setImage(new Image(Connection.getConnection().getUser().getAvatar_url()));
+        avatar.setRadius(45.0);
+        avatar.setFill(new ImagePattern(new Image(Connection.getConnection().getUser().getAvatar_url())));
         userName.setText(Connection.getConnection().getUser().getName());
-        login.setText(Connection.getConnection().getUser().getLogin());
+        login.setText("@" + Connection.getConnection().getUser().getLogin());
     }
 
 }

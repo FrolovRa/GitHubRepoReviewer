@@ -19,6 +19,7 @@ public class Connection {
     private static Connection connection = new Connection();
     private User user;
 
+
     public User getUser() {
         return user;
     }
@@ -41,28 +42,28 @@ public class Connection {
 
         Call<User> call = gitHub.getUser(credential);
 
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     System.out.println(response);
-                    if (response.body() != null){
+                    if (response.body() != null) {
                         user = response.body();
-                        Platform.runLater(new Runnable(){
+                        Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                try{
+                                try {
                                     FXMLLoader fxml = new FXMLLoader(getClass().getResource("fxml/MainWindow.fxml"));
                                     Parent root = fxml.load();
                                     Main.setController(fxml.getController());
 
                                     requestRepos(Main.getCredential());
-
-                                    Main.setMainWindow(new Stage());
-                                    Scene scene =  new Scene(root);
+                                    Stage stage = new Stage();
+                                    stage.setResizable(false);
+                                    Main.setMainWindow(stage);
+                                    Scene scene = new Scene(root);
                                     scene.setOnKeyPressed(event -> {
-                                        if(event.getCode() == KeyCode.F5){
-
+                                        if (event.getCode() == KeyCode.F5) {
                                             Main.getController().tableView.getItems().clear();
                                             Connection.getConnection().requestRepos(Main.getCredential());
                                             System.out.println("F5 was pressed");
@@ -71,19 +72,21 @@ public class Connection {
                                     Main.getMainWindow().setTitle("Repository Viewer");
                                     Main.getMainWindow().setScene(scene);
                                     Main.getMainWindow().getIcons().add(new Image("Images/cloud.png"));
-//
+                                    scene.getStylesheets().add("stylesheet/main.css");
                                     Main.getMainWindow().show();
                                     Main.getAuthWindow().close();
 
                                 } catch (Exception e) {
-                                    System.out.println(e);}
+                                    System.out.println("Cannot create main window" + e);
+                                }
                             }
                         });
                     }
                 } else {
-                    System.out.println("error");
+                    System.out.println("wrong Credentials");
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("connection error");
@@ -95,16 +98,17 @@ public class Connection {
 
         Call<List<Repository>> call = gitHub.getUserRepositories(credential);
 
-        call.enqueue(new Callback<List<Repository>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
                 if (response.isSuccessful()) {
                     System.out.println(response);
-                    if (response.body() != null){
-                        if(Main.getController() != null) Main.getController().tableView.getItems().addAll(response.body());
+                    if (response.body() != null) {
+                        if (Main.getController() != null)
+                            Main.getController().tableView.getItems().addAll(response.body());
                     }
                 } else {
-                    System.out.println("error");
+                    System.out.println("Wrong credentials");
                 }
             }
             @Override

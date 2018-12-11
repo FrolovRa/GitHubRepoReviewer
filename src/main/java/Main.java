@@ -19,9 +19,9 @@ public class Main extends Application {
         primaryStage.setTitle("Repository Viewer");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image("Images/cloud.png"));
+        primaryStage.getScene().getStylesheets().add("stylesheet/authWindow.css");
         primaryStage.show();
         authWindow = primaryStage;
-        //f7RvWUwvH8NnKWB
     }
 
     public static void main(String[] args) {
